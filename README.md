@@ -91,6 +91,7 @@ Now you should have a Fargate Cluster with 3 instances running behind the Elasti
 First we need to create a CodeBuild project.
 
 1. CodeBuild
+
    - Click on Create Build Project
    - Name it "less-demo"
    - Chose Gitub as Source provider
@@ -105,3 +106,18 @@ First we need to create a CodeBuild project.
    - Create new Service Role "codebuild-less-demo-service-role-12345"
    - Select "Use a buildspec file". buildspec.yaml must be in the root of your repository
    - Click on "Create build project"
+   - Switch to IAM/Roles and search for"codebuild-less-demo-service-role-12345". Attach "AmazonEC2ContainerRegistryFullAccess" to it
+   - Back to CodeBuild, chose your build project and click on "Start Build"
+
+2. CodePipeline
+   - Create new pipeline
+   - Name it "less-demo". It will also create a new Service Role. Click on Next
+   - Use GitHub as provider and connect to Github.
+   - Chose your repo and master branch
+   - Select "GitHub Webhooks" to automatically start pipeline. Click on Next
+   - Select AWS CodeBuild as Build provider
+   - Select you CodeBuild project from Step 1, Click on Next
+   - Select "Amazon ECS" as Deploy provider
+   - Select cluster name and service name, Click on Next
+   - Review the pipeline and click on "Create pipeline"
+   -
