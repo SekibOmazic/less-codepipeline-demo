@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (_req, res) => {
-  res.send('<h1 style="color:green;">Hello from Fargate</h1> \n');
+  res.send('<h1 style="color:blue;">Hello from Fargate</h1> \n');
 });
 
 app.listen(PORT, HOST);

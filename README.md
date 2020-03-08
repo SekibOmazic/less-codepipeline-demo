@@ -87,3 +87,21 @@ In order to configure and provision the AWS resouces follow this steps:
 Now you should have a Fargate Cluster with 3 instances running behind the Elastic Load Balancer. To check if everything is running nice and smoothly just go to EC2 tab, click on Target Groups and chose Targets Tab. You should have 3 healthy targets. The final check is to select Load Balancer on the left hand side and open DNS name in the new browser tab.
 
 ## Configure Codepipeline
+
+First we need to create a CodeBuild project.
+
+1. CodeBuild
+   - Click on Create Build Project
+   - Name it "less-demo"
+   - Chose Gitub as Source provider
+   - Connect to Github using OAuth
+   - Select "less-codepipeline-demo" as your Github demo
+   - Enable Webhook and chose PUSH event type
+   - Select managed image
+   - Select Linux as operating system
+   - Select Standard runtime
+   - Select "aws/codebuild/standard:1.0" image
+   - Enable "Privileged". IMPORTANT: this will allow docker commands to be executed
+   - Create new Service Role "codebuild-less-demo-service-role-12345"
+   - Select "Use a buildspec file". buildspec.yaml must be in the root of your repository
+   - Click on "Create build project"
